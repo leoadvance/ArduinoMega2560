@@ -1,4 +1,4 @@
-
+#include "ArduinoMega_UART1.h"
 
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
@@ -9,12 +9,14 @@ void setup()
   // put your setup code here, to run once:
   Serial.begin(115200);
 
+  UART1_Init(115200);
+
 }
 
 void loop()
 {
 
-  //  delay(1000);
+//    delay(1000);
   //  Serial.println("Hello Mega2560");
 
   if (stringComplete)
