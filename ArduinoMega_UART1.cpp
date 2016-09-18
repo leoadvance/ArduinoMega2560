@@ -1,11 +1,11 @@
 /******************** (C) COPYRIGHT 2016 陆超 **********************************
 * File Name          :  ArduinoMega_UART1.c
 * Author             :  陆超
-* CPU Type           :  STM32F
-* IDE                :  IAR 7.1
+* CPU Type           :  ArduinoMega2560
+* IDE                :  Arduino
 * Version            :  V1.0  
-* Date               :  08/20/2014
-* Description        :  定时器驱动及应用程序
+* Date               :  09/18/2016
+* Description        :  串口程序
 *******************************************************************************/
 /* Includes ------------------------------------------------------------------*/
 #include "ArduinoMega_UART1.h"

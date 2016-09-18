@@ -1,11 +1,11 @@
 /******************** (C) COPYRIGHT 2014 陆超 **********************************
 * File Name          :  Timer.h
 * Author             :  陆超
-* CPU Type           :  STM32F
-* IDE         :  IAR 7.1
+* CPU Type           :  ArduinoMega2560
+* IDE                :  Arduino
 * Version            :  V1.0  
-* Date               :  08/20/2014
-* Description        :  Timer header file
+* Date               :  09/18/2016
+* Description        :  UART1 header file
 *******************************************************************************/
 
 /* Define to prevent recursive inclusion -------------------------------------*/
