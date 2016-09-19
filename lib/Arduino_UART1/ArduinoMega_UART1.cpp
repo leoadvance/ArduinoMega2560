@@ -1,9 +1,9 @@
-/******************** (C) COPYRIGHT 2016 陆超 **********************************
+/******************** (C) COPYRIGHT 2016 陆超 ***********************************
 * File Name          :  ArduinoMega_UART1.c
 * Author             :  陆超
 * CPU Type           :  ArduinoMega2560
 * IDE                :  Arduino
-* Version            :  V1.0  
+* Version            :  V1.0
 * Date               :  09/18/2016
 * Description        :  串口程序
 *******************************************************************************/
@@ -15,7 +15,7 @@
 
 
 /* Private function prototypes -----------------------------------------------*/
-void UART1_Init(void);                                                    // UART1初始化
+void UART1_Init(void);                                                  // UART1初始化
 
 
 /* Private functions ---------------------------------------------------------*/
@@ -31,15 +31,13 @@ void UART1_Init(u32 uiBrud_Rate)
 {
 
   Serial1.begin(uiBrud_Rate);
-  
+
   Serial1.print("UART1 init With 8 N 1 Brud Rate = ");
   Serial1.println(uiBrud_Rate);
-  
+
 }// End of void UART1_Init(u32 uiBrud_Rate)
 
 
 
 
 /******************* (C) COPYRIGHT 2016 陆超 **************END OF FILE*********/
-
-
