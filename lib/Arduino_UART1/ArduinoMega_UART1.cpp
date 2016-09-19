@@ -40,4 +40,4 @@ void UART1_Init(u32 uiBrud_Rate)
 
 
 
-/******************* (C) COPYRIGHT 2016 陆超 **************END OF FILE*********/
+/******************* (C) COPYRIGHT 2016 陆超 **************END OF FILE**********/
