@@ -1,5 +1,3 @@
-#include <Arduino.h>
-
 /******************** (C) COPYRIGHT 2016 陆超 ***********************************
 * File Name          :  ArduinoMega2560.ino
 * Author             :  陆超
@@ -9,14 +7,15 @@
 * Date               :  09/18/2016
 * Description        :  Arduino 主程序
 *******************************************************************************/
+#include <Arduino.h>
+#include "ArduinoMega_SD.h"
 #include "ArduinoMega_UART1.h"
 #include "Global.h"
-#include <SPI.h>
-#include <SD.h>
+
 
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
-const int chipSelect = 4;  //设定CS接口
+
 
 void setup()
 {
@@ -26,36 +25,8 @@ void setup()
 
     UART1_Init(115200);
 
-    if (!SD.begin(chipSelect))
-    {
-        //如果从CS口与SD卡通信失败，串口输出信息Card failed, or not present
-        Serial1.println("Card failed, or not present");
-        return;
-    }
-    Serial1.println("card initialized.");  //与SD卡通信成功，串口输出信息card initialized.
-    File dataFile = SD.open("datalog.txt", FILE_WRITE);  //打开datalog.txt文件
-    if (dataFile)
-    {
+    SDCard_Init();
 
-
-        Serial1.print("Writing to test.txt...");
-        dataFile.println("testing 1, 2, 3.");
-
-
-        Serial1.println("done.");
-
-        Serial1.print("Read SDCard Data = ");
-        dataFile.seek(0);
-        while (dataFile.available())
-        {  //检查是否dataFile是否有数据
-            Serial1.write(dataFile.read());  //如果有数据则把数据发送到串口
-        }
-        dataFile.close();
-    }
-    else
-    {
-        Serial1.println("error opening datalog.txt");  //如果文件无法打开串口发送信息error opening datalog.txt
-    }
 }
 
 void loop()

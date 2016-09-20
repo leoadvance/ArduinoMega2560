@@ -1,18 +1,21 @@
 /******************** (C) COPYRIGHT 2014 陆超 **********************************
-* File Name          :  ArduinoMega_UART1.h
+* File Name          :  ArduinoMega_SD.h
 * Author             :  陆超
 * CPU Type           :  ArduinoMega2560
 * IDE                :  Arduino
 * Version            :  V1.0
 * Date               :  09/18/2016
-* Description        :  UART1 header file
+* Description        :  SD header file
 *******************************************************************************/
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __ARDUINOMEGA_UART1_H
-#define __ARDUINOMEGA_UART1_H
+#ifndef __ARDUINOMEGA_SD_H
+#define __ARDUINOMEGA_SD_H
 
 /* Includes ------------------------------------------------------------------*/
+#include <SPI.h>
+#include <SD.h>
+
 #include "Global.h"
 
 
@@ -26,9 +29,9 @@
 
 
 /* Private function prototypes -----------------------------------------------*/
-extern  void UART1_Init(u32 uiBrud_Rate);                               // 串口初始化
+extern  void SDCard_Init(void);                                         // SD卡初始化
 
 
-#endif /* __ARDUINOMEGA_UART1_H */
+#endif /* __ARDUINOMEGA_SD_H */
 
 /******************* (C) COPYRIGHT 2014 陆超 *****END OF FILE******************/
