@@ -21,7 +21,7 @@
 
 
 /* Private define ------------------------------------------------------------*/
-
+#define     SD_CS_PIN                   4                               // SD卡片选管脚
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -30,6 +30,8 @@
 
 /* Private function prototypes -----------------------------------------------*/
 extern  void SDCard_Init(void);                                         // SD卡初始化
+extern  void SD_CS_Low(void);                                           // 拉低CS
+extern  void SD_CS_High(void);                                          // 释放CS管脚
 
 
 #endif /* __ARDUINOMEGA_SD_H */

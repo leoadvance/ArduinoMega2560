@@ -13,13 +13,42 @@
 
 
 /* Private variables ---------------------------------------------------------*/
-const int chipSelect = 4;                                               //设定CS接口
+
 
 /* Private function prototypes -----------------------------------------------*/
 void SDCard_Init(void);                                                 // SD初始化
-
+void SD_CS_Low(void);                                                   // 拉低CS
+void SD_CS_High(void);                                                  // 释放CS管脚
 
 /* Private functions ---------------------------------------------------------*/
+/*******************************************************************************
+*                   陆超@2016-09-22
+* Function Name  :  SD_CS_Low
+* Description    :  拉低CS管脚
+* Input          :  None
+* Output         :  None
+* Return         :  None
+*******************************************************************************/
+void SD_CS_Low(void)
+{
+    digitalWrite(SD_CS_PIN, LOW);
+
+}// ENd of void SD_CS_Low(void)
+
+/*******************************************************************************
+*                   陆超@2016-09-22
+* Function Name  :  SD_CS_High
+* Description    :  拉高CS管脚
+* Input          :  None
+* Output         :  None
+* Return         :  None
+*******************************************************************************/
+void SD_CS_High(void)
+{
+    digitalWrite(SD_CS_PIN, LOW);
+
+}// ENd of void SD_CS_High(void)
+
 /*******************************************************************************
 *                   陆超@2016-09-18
 * Function Name  :  SDCard_Init
@@ -30,17 +59,28 @@ void SDCard_Init(void);                                                 // SD初
 *******************************************************************************/
 void SDCard_Init(void)
 {
-    if (!SD.begin(chipSelect))
+
+    DEBUG_UART.println("Initializing SD card...");
+
+    // 片选CS
+    pinMode(SD_CS_PIN, OUTPUT);
+
+    // 拉低片选
+    SD_CS_Low();
+
+    // 使能SD without CS
+    if (!SD.begin())
     {
-        //如果从CS口与SD卡通信失败，串口输出信息Card failed, or not present
+        // 如果从CS口与SD卡通信失败，串口输出信息Card failed, or not present
         DEBUG_UART.println("Card failed, or not present");
 
     }
     else
     {
-
+        // 初始化成功
+        DEBUG_UART.println("initialization done.");
     }
-    DEBUG_UART.println("card initialized.");  //与SD卡通信成功，串口输出信息card initialized.
+
     File dataFile = SD.open("datalog.txt", FILE_WRITE);  //打开datalog.txt文件
     if (dataFile)
     {
