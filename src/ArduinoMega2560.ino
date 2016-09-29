@@ -11,7 +11,9 @@
 #include "ArduinoMega_SD.h"
 #include "ArduinoMega_UART1.h"
 #include "Global.h"
+#include "DS1307.h"
 
+DS1307 clock;//define a object of DS1307 class
 
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete

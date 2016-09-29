@@ -81,7 +81,8 @@ void SDCard_Init(void)
         DEBUG_UART.println("initialization done.");
     }
 
-    File dataFile = SD.open("datalog.txt", FILE_WRITE);  //打开datalog.txt文件
+    //打开datalog.txt文件
+    File dataFile = SD.open("datalog.txt", FILE_WRITE);
     if (dataFile)
     {
 
@@ -97,13 +98,14 @@ void SDCard_Init(void)
         while (dataFile.available())
         {
             //检查是否dataFile是否有数据
-            DEBUG_UART.write(dataFile.read());  //如果有数据则把数据发送到串口
+            DEBUG_UART.write(dataFile.read());
         }
         dataFile.close();
     }
     else
     {
-        DEBUG_UART.println("error opening datalog.txt");  //如果文件无法打开串口发送信息error opening datalog.txt
+        //如果文件无法打开串口发送信息error opening datalog.txt
+        DEBUG_UART.println("error opening datalog.txt");
     }
 
 
