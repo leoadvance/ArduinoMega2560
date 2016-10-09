@@ -54,6 +54,12 @@ RTC_Print_Time();
         stringComplete = false;
     }
 
+	// 串口1接收完毕
+	if (UART1.Rx_En == true)
+	{
+		
+	}
+
 }
 
 

@@ -1,35 +1,42 @@
-/******************** (C) COPYRIGHT 2014 陆超 **********************************
-* File Name          :  ArduinoMega_UART1.h
+/******************** (C) COPYRIGHT 2016 陆超 ***********************************
+* File Name          :  Struct.h
 * Author             :  陆超
 * CPU Type           :  ArduinoMega2560
 * IDE                :  Arduino
 * Version            :  V1.0
-* Date               :  09/18/2016
-* Description        :  UART1 header file
+* Date               :  08/08/2014
+* Description        :  结构体定义
 *******************************************************************************/
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __ARDUINOMEGA_UART1_H
-#define __ARDUINOMEGA_UART1_H
+#ifndef __STRUCT_H
+#define __STRUCT_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "Global.h"
+#include "Global_Cfg.h"
+#include "arduino.h"
 
 
 
 /* Private define ------------------------------------------------------------*/
 
 
-/* Private typedef -----------------------------------------------------------*/
 
+/* Private typedef -----------------------------------------------------------*/
+typedef struct
+{
+    String      		Rx_Data;                                       	// 接收数据
+    boolean 			Rx_Complete;									// 接收完毕
+	boolean 			Rx_En;											// 接收允许
+
+
+} UART_Typedef;
 
 /* Private variables ---------------------------------------------------------*/
-extern  UART_Typedef	UART1;											// 串口变量
+
 
 /* Private function prototypes -----------------------------------------------*/
-extern  void UART1_Init(u32 uiBrud_Rate);                       		// 串口初始化
-extern  void UART1_RxData_Handle(void);									// 串口1接收处理
 
-#endif /* __ARDUINOMEGA_UART1_H */
+#endif /* __STRUCT_H */
 
-/******************* (C) COPYRIGHT 2014 陆超 *****END OF FILE******************/
+/******************* (C) COPYRIGHT 2016 陆超 **************END OF FILE**********/
