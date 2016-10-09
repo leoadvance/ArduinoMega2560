@@ -55,9 +55,12 @@ RTC_Print_Time();
     }
 
 	// 串口1接收完毕
-	if (UART1.Rx_En == true)
+	if (UART1.Rx_Complete == true)
 	{
-		
+		// 串口1数据处理
+		UART1_RxData_Handle();
+
+
 	}
 
 }

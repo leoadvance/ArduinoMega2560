@@ -53,6 +53,12 @@ void UART1_Init(u32 uiBrud_Rate)
 void UART1_RxData_Handle(void)
 {
 
+	Serial1.print("串口1收到数据:");
+	Serial1.println(UART1.Rx_Data);
+
+	UART1.Rx_Data     = "";
+	UART1.Rx_Complete = false;
+	UART1.Rx_En       = true;
 
 }// End of void UART1_RxData_Handle(void)
 
@@ -66,10 +72,13 @@ void UART1_RxData_Handle(void)
 *******************************************************************************/
 void serialEvent1(void)
 {
+	char inChar;
+
     while (Serial1.available())
     {
         // get the new byte:
-        char inChar = (char)Serial.read();
+        inChar = (char)Serial1.read();
+
 		if (UART1.Rx_En == true)
 		{
 	        // add it to the inputString:
