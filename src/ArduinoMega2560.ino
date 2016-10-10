@@ -41,7 +41,7 @@ void setup()
 	// 初始化Timer1
 	Timer1_Init();
 
-	ui1sTimestamp = Get_1s_TimeBase();
+	ui1sTimestamp = millis();
 
 
 
@@ -51,9 +51,9 @@ void loop()
 {
 
 	// s循环
-	if (Get_1s_TimeBase() > ui1sTimestamp)
+	if (millis() - ui1sTimestamp >= 1000)
 	{
-		ui1sTimestamp = Get_1s_TimeBase();
+		ui1sTimestamp = millis();
 
 		Loop_1s();
 	}

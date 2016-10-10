@@ -13,6 +13,7 @@
 #define __ARDUINOMEGA_TIMER_H
 
 /* Includes ------------------------------------------------------------------*/
+#include "TimerOne.h"
 #include "Global.h"
 
 

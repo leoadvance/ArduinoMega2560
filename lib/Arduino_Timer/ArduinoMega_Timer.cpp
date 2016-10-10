@@ -8,7 +8,6 @@
 * Description        :  Timer程序
 *******************************************************************************/
 /* Includes ------------------------------------------------------------------*/
-#include "TimerOne.h"
 #include "ArduinoMega_Timer.h"
 #include "arduino.h"
 
@@ -33,7 +32,7 @@ u32 Get_1s_TimeBase(void);												// 获取1s时间戳
 * Output         :  None
 * Return         :  None
 *******************************************************************************/
-void Timer_Init(void)
+void Timer1_Init(void)
 {
 	// 1ms时间基准
 	Timer1_1ms_TimeBase = 0;
@@ -62,6 +61,8 @@ void Timer1_Timeout_Callback(void)
 	if (Timer1_1ms_TimeBase % 1000 == 0)
 	{
 		Timer1_1s_TimeBase++;
+
+		DEBUG_UART.println("1s时间戳");
 	}
 
 }// End of void Timer1_Timeout_Callback(void)
