@@ -94,6 +94,8 @@ void SDCard_Init(void)
         DEBUG_UART.println("done.");
 
         DEBUG_UART.print("Read SDCard Data = ");
+
+		// 指向文件头
         dataFile.seek(0);
         while (dataFile.available())
         {

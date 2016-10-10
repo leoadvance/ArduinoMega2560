@@ -7,20 +7,24 @@
 * Date               :  09/18/2016
 * Description        :  Arduino 主程序
 *******************************************************************************/
+/* Includes ------------------------------------------------------------------*/
 #include <Arduino.h>
 #include "ArduinoMega_SD.h"
 #include "ArduinoMega_UART1.h"
 #include "ArduinoMega_RTC.h"
+#include "ArduinoMega_Timer.h"
 #include "Global.h"
 
 
-
-
-
+/* Private variables ---------------------------------------------------------*/
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
+u32 ui1sTimestamp;
 
+/* Private functions ---------------------------------------------------------*/
+void Loop_1s(void);
 
+/* Private functions ---------------------------------------------------------*/
 void setup()
 {
 
@@ -34,6 +38,11 @@ void setup()
     // 实时时钟初始化
     RTC_Init();
 
+	// 初始化Timer1
+	Timer1_Init();
+
+	ui1sTimestamp = Get_1s_TimeBase();
+
 
 
 }
@@ -41,9 +50,14 @@ void setup()
 void loop()
 {
 
-    delay(1000);
-    Serial.println("Hello Mega2560");
-RTC_Print_Time();
+	// s循环
+	if (Get_1s_TimeBase() > ui1sTimestamp)
+	{
+		ui1sTimestamp = Get_1s_TimeBase();
+
+		Loop_1s();
+	}
+
     if (stringComplete)
     {
         Serial.print("收到数据:");
@@ -64,7 +78,20 @@ RTC_Print_Time();
 	}
 
 }
+/*******************************************************************************
+*                   陆超@2016-10-10
+* Function Name  :  Timer1_Init
+* Description    :  Timer1初始化
+* Input          :  None
+* Output         :  None
+* Return         :  None
+*******************************************************************************/
+void Loop_1s(void)
+{
+	Serial.println("Hello Mega2560");
+	RTC_Print_Time();
 
+}// End of void Loop_1s(void)
 
 void serialEvent()
 {

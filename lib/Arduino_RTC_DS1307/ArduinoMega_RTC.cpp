@@ -34,10 +34,10 @@ void RTC_Init(void)
 {
 
     RTC_Clock.begin();
-    RTC_Clock.fillByYMD(2016,10,1);//Jan 19,2013
-    RTC_Clock.fillByHMS(1,25,30);//15:28 30"
-    RTC_Clock.fillDayOfWeek(SAT);//Saturday
-    RTC_Clock.setTime();//write time to the RTC chip
+    // RTC_Clock.fillByYMD(2016,10,1);//Jan 19,2013
+    // RTC_Clock.fillByHMS(1,25,30);//15:28 30"
+    // RTC_Clock.fillDayOfWeek(SAT);//Saturday
+    // RTC_Clock.setTime();//write time to the RTC chip
 
 }// End of void RTC_Init(void)
 

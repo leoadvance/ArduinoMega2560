@@ -32,4 +32,4 @@ extern  void UART1_RxData_Handle(void);									// 串口1接收处理
 
 #endif /* __ARDUINOMEGA_UART1_H */
 
-/******************* (C) COPYRIGHT 2014 陆超 *****END OF FILE******************/
+/******************* (C) COPYRIGHT 2016 陆超 *****END OF FILE******************/

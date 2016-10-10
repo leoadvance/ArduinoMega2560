@@ -24,7 +24,8 @@
 /* Private variables ---------------------------------------------------------*/
 //----------------------- System ----------------------------------------------/
 extern  u8                      Sys_Memory_Usage;                       // 内存使用率
-
+extern  u32						Sys_1ms_TimeBase;						// 1ms时间基准
+extern  u32						Sys_1s_TimeBase;						// 1s时间基准
 
 #endif /* __GLOBAL_H */
 
