@@ -15,6 +15,14 @@
 #include "ArduinoMega_Timer.h"
 #include "Global.h"
 
+// From Library: FreeRTOS
+#include <Arduino_FreeRTOS.h>
+#include <list.h>
+#include <queue.h>
+#include <semphr.h>
+#include <task.h>
+#include <timers.h>
+
 
 /* Private variables ---------------------------------------------------------*/
 String inputString = "";         // a string to hold incoming data
@@ -22,7 +30,7 @@ boolean stringComplete = false;  // whether the string is complete
 u32 ui1sTimestamp;
 
 /* Private functions ---------------------------------------------------------*/
-void Loop_1s(void);
+void Loop_1s(void *pvParameters);
 
 /* Private functions ---------------------------------------------------------*/
 void setup()
@@ -41,6 +49,14 @@ void setup()
 	// 初始化Timer1
 	Timer1_Init();
 
+
+	xTaskCreate(Loop_1s,
+				(const portCHAR *)"Loop_1s" ,  	// 名称
+  				128,  						   	// 堆栈
+    			NULL,
+  				2,     						 	// 优先级 3最高 0最低
+				NULL );
+
 	ui1sTimestamp = millis();
 
 
@@ -50,13 +66,13 @@ void setup()
 void loop()
 {
 
-	// s循环
-	if (millis() - ui1sTimestamp >= 1000)
-	{
-		ui1sTimestamp = millis();
-
-		Loop_1s();
-	}
+	// // s循环
+	// if (millis() - ui1sTimestamp >= 1000)
+	// {
+	// 	ui1sTimestamp = millis();
+	//
+	// 	Loop_1s();
+	// }
 
     if (stringComplete)
     {
@@ -86,10 +102,14 @@ void loop()
 * Output         :  None
 * Return         :  None
 *******************************************************************************/
-void Loop_1s(void)
+void Loop_1s(void *pvParameters )
 {
-	Serial.println("Hello Mega2560");
-	RTC_Print_Time();
+	for(;;)
+	{
+		Serial.println("Hello Mega2560");
+		RTC_Print_Time();
+		vTaskDelay( 1000 / portTICK_PERIOD_MS );
+	}
 
 }// End of void Loop_1s(void)
 
