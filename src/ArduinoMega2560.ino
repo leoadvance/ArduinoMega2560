@@ -96,8 +96,8 @@ void loop()
 }
 /*******************************************************************************
 *                   陆超@2016-10-10
-* Function Name  :  Timer1_Init
-* Description    :  Timer1初始化
+* Function Name  :  Loop_1s
+* Description    :  1s任务
 * Input          :  None
 * Output         :  None
 * Return         :  None
