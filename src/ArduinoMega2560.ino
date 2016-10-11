@@ -84,14 +84,6 @@ void loop()
         stringComplete = false;
     }
 
-	// 串口1接收完毕
-	if (UART1.Rx_Complete == true)
-	{
-		// 串口1数据处理
-		UART1_RxData_Handle();
-
-
-	}
 
 }
 /*******************************************************************************
@@ -102,7 +94,7 @@ void loop()
 * Output         :  None
 * Return         :  None
 *******************************************************************************/
-void Loop_1s(void *pvParameters )
+void Loop_1s(void *pvParameters)
 {
 	for(;;)
 	{
@@ -111,7 +103,7 @@ void Loop_1s(void *pvParameters )
 		vTaskDelay( 1000 / portTICK_PERIOD_MS );
 	}
 
-}// End of void Loop_1s(void)
+}// End of void Loop_1s(void *pvParameters)
 
 void serialEvent()
 {

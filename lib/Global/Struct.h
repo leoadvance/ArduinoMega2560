@@ -25,7 +25,8 @@
 /* Private typedef -----------------------------------------------------------*/
 typedef struct
 {
-    String      		Rx_Data;                                       	// 接收数据
+    char *      		Rx_Data;                                       	// 接收数据
+	unsigned short		Rx_Len;											// 接收数据长度
     boolean 			Rx_Complete;									// 接收完毕
 	boolean 			Rx_En;											// 接收允许
 

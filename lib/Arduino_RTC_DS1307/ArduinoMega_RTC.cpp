@@ -18,6 +18,7 @@ DS1307 RTC_Clock;                                                       // 声�
 /* Private function prototypes -----------------------------------------------*/
 void RTC_Init(void);                                                    // RTC初始化
 void RTC_Print_Time(void);                                              // 打印当前时间
+void RTC_Set_Time(u16 usYear, u8 ucMonth, u8 ucDay, u8 ucHour, u8 ucminute, u8 ucSecond, u8 ucWeekday);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -40,6 +41,24 @@ void RTC_Init(void)
     // RTC_Clock.setTime();//write time to the RTC chip
 
 }// End of void RTC_Init(void)
+
+/*******************************************************************************
+*                   陆超@2016-10-08
+* Function Name  :  RTC_Print_Time
+* Description    :  RTC打印时间
+* Input          :  None
+* Output         :  None
+* Return         :  None
+*******************************************************************************/
+void RTC_Set_Time(u16 usYear, u8 ucMonth, u8 ucDay, u8 ucHour, u8 ucminute, u8 ucSecond, u8 ucWeekday)
+{
+	RTC_Clock.fillByYMD(usYear, ucMonth, ucDay);//Jan 19,2013
+    RTC_Clock.fillByHMS(ucHour, ucminute, ucSecond);//15:28 30"
+    RTC_Clock.fillDayOfWeek(ucWeekday);//Saturday
+    RTC_Clock.setTime();//write time to the RTC chip
+
+}// End of ……
+
 
 /*******************************************************************************
 *                   陆超@2016-10-08

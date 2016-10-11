@@ -15,6 +15,14 @@
 #include "Global_Cfg.h"
 #include "Struct.h"
 
+// From Library: FreeRTOS
+#include <Arduino_FreeRTOS.h>
+#include <list.h>
+#include <queue.h>
+#include <semphr.h>
+#include <task.h>
+#include <timers.h>
+
 /* Private define ------------------------------------------------------------*/
 
 /* Private typedef -----------------------------------------------------------*/

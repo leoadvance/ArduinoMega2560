@@ -31,7 +31,7 @@
 /* Private function prototypes -----------------------------------------------*/
 extern  void RTC_Init(void);                                            // RTC卡初始化
 extern  void RTC_Print_Time(void);                                      // 打印当前时间
-
+extern  void RTC_Set_Time(u16 usYear, u8 ucMonth, u8 ucDay, u8 ucHour, u8 ucminute, u8 ucSecond, u8 ucWeekday);
 
 #endif /* __ARDUINOMEGA_RTC_H */
 
