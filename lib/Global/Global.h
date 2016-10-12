@@ -22,6 +22,7 @@
 #include <semphr.h>
 #include <task.h>
 #include <timers.h>
+#include <semphr.h>
 
 /* Private define ------------------------------------------------------------*/
 

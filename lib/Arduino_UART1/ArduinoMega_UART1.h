@@ -19,7 +19,7 @@
 
 /* Private define ------------------------------------------------------------*/
 #define     UART1_RX_BUFFER_SIZE       	64                         		// 串口接收大小
-
+#define     UART1_TX_BUFFER_SIZE       	64                         		// 串口发送大小
 
 /* Private typedef -----------------------------------------------------------*/
 
@@ -30,6 +30,7 @@ extern  UART_Typedef	UART1;											// 串口变量
 /* Private function prototypes -----------------------------------------------*/
 extern  void UART1_Init(u32 uiBrud_Rate);                       		// 串口初始化
 extern  void UART1_RxData_Handle(void);									// 串口1接收处理
+extern  void UART1_Rx_Handle_Task(void);								//
 
 #endif /* __ARDUINOMEGA_UART1_H */
 

@@ -83,6 +83,11 @@ void loop()
         inputString = "";
         stringComplete = false;
     }
+	if (UART1.Rx_Complete == true)
+	{
+		UART1_RxData_Handle();
+		UART1.Rx_Complete = false;
+	}
 
 
 }
