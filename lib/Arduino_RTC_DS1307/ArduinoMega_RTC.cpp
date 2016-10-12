@@ -70,19 +70,16 @@ void RTC_Set_Time(u16 usYear, u8 ucMonth, u8 ucDay, u8 ucHour, u8 ucminute, u8 u
 *******************************************************************************/
 void RTC_Print_Time(void)
 {
+	char Time_Data[48];
     RTC_Clock.getTime();
-	DEBUG_UART.print(RTC_Clock.hour, DEC);
-	DEBUG_UART.print(":");
-	DEBUG_UART.print(RTC_Clock.minute, DEC);
-	DEBUG_UART.print(":");
-	DEBUG_UART.print(RTC_Clock.second, DEC);
-	DEBUG_UART.print("	");
-	DEBUG_UART.print(RTC_Clock.month, DEC);
-	DEBUG_UART.print("/");
-	DEBUG_UART.print(RTC_Clock.dayOfMonth, DEC);
-	DEBUG_UART.print("/");
-	DEBUG_UART.print(RTC_Clock.year+2000, DEC);
-	DEBUG_UART.print(" ");
+	sprintf(Time_Data, "%02d/%02d/%02d %02d:%02d:%02d ",
+		                   RTC_Clock.year+2000,
+						   RTC_Clock.month,
+					       RTC_Clock.dayOfMonth,
+					       RTC_Clock.hour,
+					   	   RTC_Clock.minute,
+					       RTC_Clock.second);
+	DEBUG_UART.print(Time_Data);
 	switch (RTC_Clock.dayOfWeek)// Friendly printout the weekday
 	{
         case MON:

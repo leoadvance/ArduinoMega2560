@@ -10,7 +10,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "ArduinoMega_UART1.h"
 #include "arduino.h"
-#include "ArduinoMega_RTC.h"
+
 
 /* Private variables ---------------------------------------------------------*/
 UART_Typedef	UART1;													// 串口变量
@@ -92,6 +92,7 @@ void UART1_RxData_Handle(void)
 	if (strstr(UART1.Rx_Data , "RTC:"))
 	{
 		Serial1.println("接收到配置RTC命令");
+		Shell_Set_RTC(UART1.Rx_Data);
 	}
 
 }// End of void UART1_RxData_Handle(void)

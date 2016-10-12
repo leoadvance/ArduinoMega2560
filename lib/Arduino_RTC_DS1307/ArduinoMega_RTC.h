@@ -1,4 +1,4 @@
-/******************** (C) COPYRIGHT 2014 陆超 **********************************
+/******************** (C) COPYRIGHT 2016 陆超 **********************************
 * File Name          :  ArduinoMega_RTC.h
 * Author             :  陆超
 * CPU Type           :  ArduinoMega2560
@@ -13,11 +13,9 @@
 #define __ARDUINOMEGA_RTC_H
 
 /* Includes ------------------------------------------------------------------*/
+#include "Global.h"
 #include "Wire.h"
 #include "DS1307.h"
-
-#include "Global.h"
-
 
 
 /* Private define ------------------------------------------------------------*/

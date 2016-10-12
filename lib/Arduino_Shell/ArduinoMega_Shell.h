@@ -1,36 +1,34 @@
-/******************** (C) COPYRIGHT 2014 陆超 **********************************
-* File Name          :  ArduinoMega_UART1.h
+/******************** (C) COPYRIGHT 2016 陆超 **********************************
+* File Name          :  ArduinoMega_Shell.h
 * Author             :  陆超
 * CPU Type           :  ArduinoMega2560
 * IDE                :  Arduino
 * Version            :  V1.0
-* Date               :  09/18/2016
-* Description        :  UART1 header file
+* Date               :  10/12/2016
+* Description        :  Shell header file
 *******************************************************************************/
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __ARDUINOMEGA_UART1_H
-#define __ARDUINOMEGA_UART1_H
+#ifndef __ARDUINOMEGA_SHELL_H
+#define __ARDUINOMEGA_SHELL_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "Global.h"
-#include "ArduinoMega_Shell.h"
+
 
 
 /* Private define ------------------------------------------------------------*/
-#define     UART1_RX_BUFFER_SIZE       	64                         		// 串口接收大小
+#define     SHELL_RTC_HEAD       		"RTC: "                        	// RTC识别头
 
 
 /* Private typedef -----------------------------------------------------------*/
 
-
 /* Private variables ---------------------------------------------------------*/
-extern  UART_Typedef	UART1;											// 串口变量
+
 
 /* Private function prototypes -----------------------------------------------*/
-extern  void UART1_Init(u32 uiBrud_Rate);                       		// 串口初始化
-extern  void UART1_RxData_Handle(void);									// 串口1接收处理
+extern	void Shell_Set_RTC(char *p_Data);								// 设置RTC
 
-#endif /* __ARDUINOMEGA_UART1_H */
+#endif /* __ARDUINOMEGA_SHELL_H */
 
-/******************* (C) COPYRIGHT 2016 陆超 *****END OF FILE******************/
+/******************* (C) COPYRIGHT 2016 陆超 ***** END OF FILE ****************/
