@@ -13,24 +13,19 @@
 #include "ArduinoMega_UART1.h"
 #include "ArduinoMega_RTC.h"
 #include "ArduinoMega_Timer.h"
+#include "ArduinoMega_DHTxx.h"
 #include "Global.h"
-
-// From Library: FreeRTOS
-#include <Arduino_FreeRTOS.h>
-#include <list.h>
-#include <queue.h>
-#include <semphr.h>
-#include <task.h>
-#include <timers.h>
 
 
 /* Private variables ---------------------------------------------------------*/
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
-u32 ui1sTimestamp;
+u32 ui1sTimestamp;														// s时间戳
+u32 ui100msTimestamp;													// 100ms时间戳
 
 /* Private functions ---------------------------------------------------------*/
-void Loop_1s(void *pvParameters);
+void Loop_1s(void);														// s循环
+void Loop_100ms(void);													// 100ms循环
 
 /* Private functions ---------------------------------------------------------*/
 void setup()
@@ -49,13 +44,8 @@ void setup()
 	// 初始化Timer1
 	Timer1_Init();
 
-
-	xTaskCreate(Loop_1s,
-				(const portCHAR *)"Loop_1s" ,  	// 名称
-  				128,  						   	// 堆栈
-    			NULL,
-  				2,     						 	// 优先级 3最高 0最低
-				NULL );
+	// 初始化温湿度
+	DHTxx_Init();
 
 	ui1sTimestamp = millis();
 
@@ -66,13 +56,22 @@ void setup()
 void loop()
 {
 
-	// // s循环
-	// if (millis() - ui1sTimestamp >= 1000)
-	// {
-	// 	ui1sTimestamp = millis();
-	//
-	// 	Loop_1s();
-	// }
+	// s循环
+	if (millis() - ui1sTimestamp >= 1000)
+	{
+		ui1sTimestamp = millis();
+
+		Loop_1s();
+	}
+
+	// s循环
+	if (millis() - ui100msTimestamp >= 100)
+	{
+		ui100msTimestamp = millis();
+
+		Loop_100ms();
+	}
+
 
     if (stringComplete)
     {
@@ -91,6 +90,22 @@ void loop()
 
 
 }
+
+/*******************************************************************************
+*                   陆超@2016-10-13
+* Function Name  :  Loop_100ms
+* Description    :  1ms任务
+* Input          :  None
+* Output         :  None
+* Return         :  None
+*******************************************************************************/
+void Loop_100ms(void)
+{
+
+
+
+}// End of void Loop_100ms(void)
+
 /*******************************************************************************
 *                   陆超@2016-10-10
 * Function Name  :  Loop_1s
@@ -99,16 +114,14 @@ void loop()
 * Output         :  None
 * Return         :  None
 *******************************************************************************/
-void Loop_1s(void *pvParameters)
+void Loop_1s(void)
 {
-	for(;;)
-	{
-		Serial.println("Hello Mega2560");
-		RTC_Print_Time();
-		vTaskDelay( 1000 / portTICK_PERIOD_MS );
-	}
+	float Temp, Humi;
+	Serial.println("Hello Mega2560");
+	RTC_Print_Time();
+	DHTxx_Read(&Temp, &Humi);
 
-}// End of void Loop_1s(void *pvParameters)
+}// End of void Loop_1s(void)
 
 void serialEvent()
 {

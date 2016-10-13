@@ -17,11 +17,11 @@ u32	Timer1_1ms_TimeBase;												// 1ms时间基准
 u32 Timer1_1s_TimeBase;													// 1s时间基准
 
 /* Private functions ---------------------------------------------------------*/
-void Timer1_Init(void);                                              	// Timer初始化
-void Timer1_Timeout_Callback(void);										// 超时回调
+void Timer1_Init(void);                                              	// Timer1初始化
+void Timer1_Timeout_Callback(void);										// 回调
 
-u32 Get_1ms_TimeBase(void);												// 获取1ms时间戳
-u32 Get_1s_TimeBase(void);												// 获取1s时间戳
+u32 Get_1ms_TimeBase(void);												// 获取1ms时间基准
+u32 Get_1s_TimeBase(void);												// 获取1s时间基准
 
 /* Private functions ---------------------------------------------------------*/
 /*******************************************************************************
@@ -34,14 +34,14 @@ u32 Get_1s_TimeBase(void);												// 获取1s时间戳
 *******************************************************************************/
 void Timer1_Init(void)
 {
-	// 1ms时间基准
+	// 变量初始化
 	Timer1_1ms_TimeBase = 0;
 	Timer1_1s_TimeBase  = 0;
 
 	// 1ms超时
 	Timer1.initialize(1000);
 
-	// 超时回调
+	// 注册回调
 	Timer1.attachInterrupt(Timer1_Timeout_Callback);
 
 }// End of void Timer1_Init(void)
@@ -62,7 +62,7 @@ void Timer1_Timeout_Callback(void)
 	{
 		Timer1_1s_TimeBase++;
 
-		DEBUG_UART.println("1s时间戳");
+		DEBUG_UART.println("1s Timestamp");
 	}
 
 }// End of void Timer1_Timeout_Callback(void)
@@ -70,10 +70,10 @@ void Timer1_Timeout_Callback(void)
 /*******************************************************************************
 *                   陆超@2016-10-10
 * Function Name  :  Get_1ms_TimeBase
-* Description    :  获取1ms时间戳
+* Description    :  获取1ms时间基准
 * Input          :  None
 * Output         :  None
-* Return         :  1ms时间戳
+* Return         :  1ms时间基准
 *******************************************************************************/
 u32 Get_1ms_TimeBase(void)
 {
@@ -84,10 +84,10 @@ u32 Get_1ms_TimeBase(void)
 /*******************************************************************************
 *                   陆超@2016-10-10
 * Function Name  :  Get_1s_TimeBase
-* Description    :  获取1s时间戳
+* Description    :  获取1s时间基准
 * Input          :  None
 * Output         :  None
-* Return         :  1ms时间戳
+* Return         :  1ms时间基准
 *******************************************************************************/
 u32 Get_1s_TimeBase(void)
 {
