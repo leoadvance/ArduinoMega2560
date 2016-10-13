@@ -13,7 +13,7 @@
 
 
 /* Private variables ---------------------------------------------------------*/
-DHT Dht11;																// 声明结构体
+DHT dht(DHTPIN, DHTTYPE);
 
 /* Private function prototypes -----------------------------------------------*/
 void DHTxx_Init(void);                                                 	// DHTxx初始化
@@ -30,7 +30,7 @@ int DHTxx_Read(float *fTemp, float *fHumi);								// 读取温湿度
 *******************************************************************************/
 void DHTxx_Init(void)
 {
-	Dht11.setup(DHTxx_DATA_PIN);
+	dht.begin();
 
 }// End of void DHTxx_Init(void)
 
@@ -41,37 +41,44 @@ void DHTxx_Init(void)
 * Input          :  float *fTemp  温度
 *					float *fHumi  湿度
 * Output         :  None
-* Return         :  0 成功 -1 超时 -2 crc错误
+* Return         :  0 成功 -1 失败
 *******************************************************************************/
 int DHTxx_Read(float *fTemp, float *fHumi)
 {
-	char *p_Get_Status;
-	char Send_Data[48];
+	// char Send_Data[48];
 
-	// 读取温湿度
-	*fHumi = Dht11.getHumidity();
-	*fTemp = Dht11.getTemperature();
+	// 读取湿度 温度
+	*fHumi = dht.readHumidity();
+    *fTemp = dht.readTemperature();
 
-	p_Get_Status = (char *)Dht11.getStatusString();
-	sprintf(Send_Data, "Temp = %f℃, Humi = %f%%  %s \r\n", (double)*fTemp, (double)*fHumi, p_Get_Status);
-	DEBUG_UART.print(Send_Data);
 
-	if (strstr(p_Get_Status, "OK"))
+    // 是否读取失败
+    if (isnan(*fHumi) || isnan(*fTemp))
 	{
-		return 0;
-	}
-	else if (strstr(p_Get_Status, "TIMEOUT"))
-	{
+		DEBUG_UART.println("Failed to read from DHT sensor!");
 		return -1;
-	}
-	else
-	{
-		return -2;
-	}
+    }
 
+	// sprintf(Send_Data, "Temp = %f℃, Humi = %f%% \r\n", (double)*fTemp, (double)*fHumi);
+	// DEBUG_UART.print(Send_Data);
+    DEBUG_UART.print("Humidity: ");
+    DEBUG_UART.print(*fHumi);
+    DEBUG_UART.print(" %\t");
+    DEBUG_UART.print("Temperature: ");
+    DEBUG_UART.print(*fTemp);
+    DEBUG_UART.println(" *C");
+    // DEBUG_UART.print(f);
+    // DEBUG_UART.print(" *F\t");
+    // DEBUG_UART.print("Heat index: ");
+    // DEBUG_UART.print(hic);
+    // DEBUG_UART.print(" *C ");
+    // DEBUG_UART.print(hif);
+    // DEBUG_UART.println(" *F");
+
+	return 0;
 
 
 }// End of int DHTxx_Init(float *fTemp, float *fHumi)
 
 
-/******************* (C) COPYRIGHT 2016 陆超 **************END OF FILE**********/
+/******************* (C) COPYRIGHT 2016 陆超 ************* END OF FILE *********/

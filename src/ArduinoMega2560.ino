@@ -17,11 +17,14 @@
 #include "Global.h"
 
 
+
 /* Private variables ---------------------------------------------------------*/
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
 u32 ui1sTimestamp;														// s时间戳
 u32 ui100msTimestamp;													// 100ms时间戳
+
+
 
 /* Private functions ---------------------------------------------------------*/
 void Loop_1s(void);														// s循环
@@ -48,7 +51,6 @@ void setup()
 	DHTxx_Init();
 
 	ui1sTimestamp = millis();
-
 
 
 }
@@ -120,6 +122,7 @@ void Loop_1s(void)
 	Serial.println("Hello Mega2560");
 	RTC_Print_Time();
 	DHTxx_Read(&Temp, &Humi);
+
 
 }// End of void Loop_1s(void)
 

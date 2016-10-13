@@ -116,4 +116,4 @@ void SDCard_Init(void)
 
 
 
-/******************* (C) COPYRIGHT 2016 陆超 **************END OF FILE**********/
+/******************* (C) COPYRIGHT 2016 陆超 ************* END OF FILE *********/

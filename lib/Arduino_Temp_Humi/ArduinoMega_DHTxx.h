@@ -18,8 +18,11 @@
 
 
 /* Private define ------------------------------------------------------------*/
-#define     DHTxx_DATA_PIN              14                             	// DHTxx卡片选管脚
+#define 	DHTPIN            			49        						// HTxx卡片选管脚
 
+#define 	DHTTYPE           			DHT11     						// DHT 11
+// #define 	DHTTYPE           			DHT22     						// DHT 22 (AM2302)
+// #define 	DHTTYPE           			DHT21     						// DHT 21 (AM2301)
 
 /* Private typedef -----------------------------------------------------------*/
 
