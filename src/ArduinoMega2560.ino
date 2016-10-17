@@ -128,10 +128,10 @@ void Loop_100ms(void)
 *******************************************************************************/
 void Loop_1s(void)
 {
-	float Temp, Humi;
+	// float Temp, Humi;
 	Serial.println("Hello Mega2560");
 	RTC_Print_Time();
-	DHTxx_Read(&Temp, &Humi);
+	// DHTxx_Read(&Temp, &Humi);
 
 
 }// End of void Loop_1s(void)

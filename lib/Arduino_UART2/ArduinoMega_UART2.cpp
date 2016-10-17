@@ -41,6 +41,7 @@ void UART2_Init(u32 uiBrud_Rate, UART2_RxData_Callback Fun_Callback)
 	UART2.Rx_Complete = false;
 
 	RxData_Callback = Fun_Callback;
+
   	Serial2.begin(uiBrud_Rate);
   	Serial2.print("UART2 init With 8 N 1 Brud Rate = ");
   	Serial2.println(uiBrud_Rate);
@@ -78,7 +79,8 @@ void UART2_RxData_Handle(void)
 	UART2.Rx_Data[UART2.Rx_Len] = '\0';
 	memcpy(UART2.Tx_Data, UART2.Rx_Data, UART2.Rx_Len + 1);
 
-	Serial2.println(UART2.Tx_Data);
+	// Serial2.println(UART2.Tx_Data);
+	DEBUG_UART.println(UART2.Tx_Data);
 
 	RxData_Callback(UART2.Rx_Data, UART2.Rx_Len);
 

@@ -12,6 +12,7 @@
 #ifndef __GLOBAL_H
 #define __GLOBAL_H
 /* Includes ------------------------------------------------------------------*/
+#include <Arduino_FreeRTOS.h>
 #include "Global_Cfg.h"
 #include "Struct.h"
 
