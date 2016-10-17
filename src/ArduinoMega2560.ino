@@ -11,6 +11,7 @@
 #include <Arduino.h>
 #include "ArduinoMega_SD.h"
 #include "ArduinoMega_UART1.h"
+#include "ArduinoMega_UART2.h"
 #include "ArduinoMega_RTC.h"
 #include "ArduinoMega_Timer.h"
 #include "ArduinoMega_DHTxx.h"
@@ -38,6 +39,7 @@ void setup()
     Serial.begin(115200);
 
     UART1_Init(115200);
+	UART2_Init(115200);
 
     SDCard_Init();
 
@@ -88,6 +90,12 @@ void loop()
 	{
 		UART1_RxData_Handle();
 		UART1.Rx_Complete = false;
+	}
+
+	if (UART2.Rx_Complete == true)
+	{
+		UART2_RxData_Handle();
+		UART2.Rx_Complete = false;
 	}
 
 
