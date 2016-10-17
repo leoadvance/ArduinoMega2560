@@ -14,10 +14,11 @@
 
 /* Private variables ---------------------------------------------------------*/
 UART_Typedef	UART2;													// 串口变量
-
+UART2_RxData_Callback RxData_Callback;
 /* Private function prototypes -----------------------------------------------*/
-void UART2_Init(void);                                                  // UART2初始化
+void UART2_Init(u32 uiBrud_Rate, UART2_RxData_Callback Fun_Callback); 	// 串口初始化                                                 // UART2初始化
 void UART2_Rx_Handle_Task(void *pvParameters);							// 串口接收处理任务
+
 
 /* Private functions ---------------------------------------------------------*/
 /*******************************************************************************
@@ -25,10 +26,11 @@ void UART2_Rx_Handle_Task(void *pvParameters);							// 串口接收处理任务
 * Function Name  :  UART2_Init
 * Description    :  串口初始化
 * Input          :  u32 uiBrud_Rate 波特率
+*					UART2_RxData_Callback Fun_Callback 回调函数
 * Output         :  None
 * Return         :  None
 *******************************************************************************/
-void UART2_Init(u32 uiBrud_Rate)
+void UART2_Init(u32 uiBrud_Rate, UART2_RxData_Callback Fun_Callback)
 {
 
 	UART2.Rx_Data     = (char*)malloc(UART2_RX_BUFFER_SIZE);
@@ -38,11 +40,12 @@ void UART2_Init(u32 uiBrud_Rate)
 	UART2.Tx_Len      = 0;
 	UART2.Rx_Complete = false;
 
+	RxData_Callback = Fun_Callback;
   	Serial2.begin(uiBrud_Rate);
   	Serial2.print("UART2 init With 8 N 1 Brud Rate = ");
   	Serial2.println(uiBrud_Rate);
 
-}// End of void UART2_Init(u32 uiBrud_Rate)
+}// End of void UART2_Init(u32 uiBrud_Rate, UART2_RxData_Callback Fun_Callback)
 
 /*******************************************************************************
 *                   陆超@2016-10-10
@@ -76,6 +79,8 @@ void UART2_RxData_Handle(void)
 	memcpy(UART2.Tx_Data, UART2.Rx_Data, UART2.Rx_Len + 1);
 
 	Serial2.println(UART2.Tx_Data);
+
+	RxData_Callback(UART2.Rx_Data, UART2.Rx_Len);
 
 	UART2.Rx_Len      = 0;
 	UART2.Rx_En       = true;

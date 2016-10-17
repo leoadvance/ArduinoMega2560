@@ -16,7 +16,7 @@
 UART_Typedef	UART1;													// 串口变量
 
 /* Private function prototypes -----------------------------------------------*/
-void UART1_Init(void);                                                  // UART1初始化
+void UART1_Init(u32 uiBrud_Rate);                                       // UART1初始化
 void UART1_Rx_Handle_Task(void *pvParameters);							// 串口接收处理任务
 
 /* Private functions ---------------------------------------------------------*/

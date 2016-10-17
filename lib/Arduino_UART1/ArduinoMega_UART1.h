@@ -1,4 +1,4 @@
-/******************** (C) COPYRIGHT 2014 陆超 **********************************
+/******************** (C) COPYRIGHT 2016 陆超 **********************************
 * File Name          :  ArduinoMega_UART1.h
 * Author             :  陆超
 * CPU Type           :  ArduinoMega2560

@@ -12,6 +12,7 @@
 #include "ArduinoMega_SD.h"
 #include "ArduinoMega_UART1.h"
 #include "ArduinoMega_UART2.h"
+#include "ArduinoMega_GPU_LCD.h"
 #include "ArduinoMega_RTC.h"
 #include "ArduinoMega_Timer.h"
 #include "ArduinoMega_DHTxx.h"
@@ -39,7 +40,8 @@ void setup()
     Serial.begin(115200);
 
     UART1_Init(115200);
-	UART2_Init(115200);
+
+	GPU_LCD_Init();
 
     SDCard_Init();
 
