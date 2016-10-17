@@ -28,6 +28,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 extern  void GPU_LCD_Init(void);                       					// GPU LCD≥ı ºªØ
+extern  void GPU_LCD_Task(void);										// GPU Task
 
 #endif /* __ARDUINOMEGA_GPU_LCD_H */
 

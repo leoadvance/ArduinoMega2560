@@ -133,6 +133,8 @@ void Loop_1s(void)
 	RTC_Print_Time();
 	// DHTxx_Read(&Temp, &Humi);
 
+	GPU_LCD_Task();
+
 
 }// End of void Loop_1s(void)
 
