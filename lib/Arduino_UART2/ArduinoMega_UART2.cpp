@@ -18,7 +18,7 @@ UART2_RxData_Callback RxData_Callback;
 /* Private function prototypes -----------------------------------------------*/
 void UART2_Init(u32 uiBrud_Rate, UART2_RxData_Callback Fun_Callback); 	// 串口初始化                                                 // UART2初始化
 void UART2_Rx_Handle_Task(void *pvParameters);							// 串口接收处理任务
-
+void UART2_Rx_Finish_Judge(void);										// 串口接收完成判断
 
 /* Private functions ---------------------------------------------------------*/
 /*******************************************************************************
@@ -33,12 +33,13 @@ void UART2_Rx_Handle_Task(void *pvParameters);							// 串口接收处理任务
 void UART2_Init(u32 uiBrud_Rate, UART2_RxData_Callback Fun_Callback)
 {
 
-	UART2.Rx_Data     = (char*)malloc(UART2_RX_BUFFER_SIZE);
-	UART2.Tx_Data     = (char*)malloc(UART2_TX_BUFFER_SIZE);
-	UART2.Rx_En       = true;
-	UART2.Rx_Len      = 0;
-	UART2.Tx_Len      = 0;
-	UART2.Rx_Complete = false;
+	UART2.Rx_Data      = (char*)malloc(UART2_RX_BUFFER_SIZE);
+	UART2.Tx_Data      = (char*)malloc(UART2_TX_BUFFER_SIZE);
+	UART2.Rx_En        = true;
+	UART2.Rx_Len       = 0;
+	UART2.Tx_Len       = 0;
+	UART2.Rx_Complete  = false;
+	UART2.Rx_Timestamp = 0;
 
 	RxData_Callback = Fun_Callback;
 
@@ -109,21 +110,39 @@ void serialEvent2(void)
 
 		if (UART2.Rx_En == true)
 		{
-	        // add it to the inputString:
-	        UART2.Rx_Data[UART2.Rx_Len++] = inChar;
-	        // if the incoming character is a newline, set a flag
-	        // so the main loop can do something about it:
-	        if ((inChar == '\n') || UART2.Rx_Len >= UART2_RX_BUFFER_SIZE)
-	        {
-				UART2.Rx_En       = false;
-				UART2.Rx_Complete = true;
-
-	        }
+			// 未溢出
+	        if (UART2.Rx_Len < UART2_RX_BUFFER_SIZE)
+			{
+	        	UART2.Rx_Data[UART2.Rx_Len++] = inChar;
+			}
 		}
     }
 
+	// 刷新超时时间
+	UART2.Rx_Timestamp = 5;
 
 }// End of void serialEvent2(void)
 
+/*******************************************************************************
+*                   陆超@2016-10-18
+* Function Name  :  UART2_Rx_Finish_Judge
+* Description    :  串口接收完成判断
+* Input          :  None
+* Output         :  None
+* Return         :  None
+*******************************************************************************/
+void UART2_Rx_Finish_Judge(void)
+{
+	if (UART2.Rx_Timestamp)
+	{
+		UART2.Rx_Timestamp--;
+		if (UART2.Rx_Timestamp == 0)
+		{
+			UART2.Rx_En       = false;
+			UART2.Rx_Complete = true;
+		}
+	}
+
+}// End of void UART2_Rx_Finish_Judge(void)
 
 /******************* (C) COPYRIGHT 2016 陆超 **************END OF FILE**********/

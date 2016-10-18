@@ -10,7 +10,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "ArduinoMega_Timer.h"
 #include "arduino.h"
-
+#include "ArduinoMega_UART2.h"
 
 /* Private variables ---------------------------------------------------------*/
 u32	Timer1_1ms_TimeBase;												// 1ms时间基准
@@ -64,6 +64,8 @@ void Timer1_Timeout_Callback(void)
 
 		DEBUG_UART.println("1s Timestamp");
 	}
+
+	UART2_Rx_Finish_Judge();
 
 }// End of void Timer1_Timeout_Callback(void)
 

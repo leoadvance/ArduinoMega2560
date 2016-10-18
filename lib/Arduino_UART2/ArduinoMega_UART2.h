@@ -31,6 +31,7 @@ extern  UART_Typedef	UART2;											// 串口变量
 extern  void UART2_Init(u32 uiBrud_Rate, UART2_RxData_Callback Fun_Callback);   // 串口初始化
 extern  void UART2_RxData_Handle(void);									// 串口1接收处理
 extern  void UART2_Rx_Handle_Task(void);								//
+extern  void UART2_Rx_Finish_Judge(void);								// 串口接收完成判断
 
 #endif /* __ARDUINOMEGA_UART2_H */
 

@@ -29,6 +29,7 @@ typedef struct
 	unsigned short		Rx_Len;											// 接收数据长度
 	char *      		Tx_Data;                                       	// 发送数据
 	unsigned short		Tx_Len;											// 发送数据长度
+	unsigned char		Rx_Timestamp;									// 时间戳
     boolean 			Rx_Complete;									// 接收完毕
 	boolean 			Rx_En;											// 接收允许
 
