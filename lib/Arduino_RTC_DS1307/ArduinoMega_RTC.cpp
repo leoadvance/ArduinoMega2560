@@ -73,7 +73,7 @@ void RTC_Print_Time(void)
 	char Time_Data[48];
     RTC_Clock.getTime();
 	sprintf(Time_Data, "%02d/%02d/%02d %02d:%02d:%02d ",
-		                   RTC_Clock.year+2000,
+		                   RTC_Clock.year + 2000,
 						   RTC_Clock.month,
 					       RTC_Clock.dayOfMonth,
 					       RTC_Clock.hour,

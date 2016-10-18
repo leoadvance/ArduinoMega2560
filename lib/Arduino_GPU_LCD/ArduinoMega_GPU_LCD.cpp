@@ -8,8 +8,7 @@
 * Description        :  GPU_LCD绋嬪簭
 *******************************************************************************/
 /* Includes ------------------------------------------------------------------*/
-
-
+#include "ArduinoMega_RTC.h"
 #include "ArduinoMega_UART2.h"
 #include "ArduinoMega_GPU_LCD.h"
 #include "arduino.h"
@@ -55,13 +54,20 @@ void GPU_LCD_Init(void)
 
 	// 清屏
 	GPU_LCD.print("CLS(0);");
-	GPU_LCD.print("\r\n");
 
-	// 显示温湿度界面
-	GPU_LCD.print("DS16(32,48,'温度:',11,0);");
-	GPU_LCD.print("DS16(144,50,'℃',11,0);");
-	GPU_LCD.print("DS16(32,80,'湿度:',11,0);");
-	GPU_LCD.print("DS16(144,82,'%',11,0);");
+	// 绘制背景界面
+	GPU_LCD.print("CLS(0);");
+	GPU_LCD.print("BOXF(0,0,159,159,58);");
+	GPU_LCD.print("BOXF(160,0,319,159,46);");
+	GPU_LCD.print("BOXF(0,160,319,239,20);");
+	GPU_LCD.print("SBC(58);");
+	GPU_LCD.print("DS32(48,16,'温度',43,0);");
+	GPU_LCD.print("SBC(46);");
+	GPU_LCD.print("DS32(208,16,'湿度',47,0);");
+	GPU_LCD.print("SBC(58);");
+	GPU_LCD.print("DS24(128,106,'℃',1,0);");
+	GPU_LCD.print("SBC(46);");
+	GPU_LCD.print("DS24(288,100,'%',1,0);");
 	GPU_LCD.print("\r\n");
 
 }// End of void GPU_LCD_Init(void锛?
@@ -103,11 +109,33 @@ void GPU_LCD_Task(void)
 	dtostrf(Temp, 3, 2, Temp_Array);
 	dtostrf(Humi, 3, 2, Humi_Array);
 
-	sprintf(Buffer, "LABL(16,80,50,136,'%s',15,2);", Temp_Array);
+
+
+
+	// 显示温湿度
+	sprintf(Buffer, "SBC(58);LABL(24,32,100,128,'%s',20,1);", Temp_Array);
 	GPU_LCD.print(Buffer);
 
-	sprintf(Buffer, "LABL(16,80,82,136,'%s',15,2);\r\n", Humi_Array);
+	sprintf(Buffer, "SBC(46);LABL(24,192,100,288,'%s',20,1);", Humi_Array);
 	GPU_LCD.print(Buffer);
+
+
+	// 显示万年历
+	RTC_Clock.getTime();
+	GPU_LCD.print("SBC(20);");
+	sprintf(Buffer, "LABL(24,0,168,319,'%04d/%02d/%02d',22,1);",
+										RTC_Clock.year + 2000,
+							   			RTC_Clock.month,
+						       			RTC_Clock.dayOfMonth);
+	GPU_LCD.print(Buffer);
+
+	sprintf(Buffer, "LABL(24,0,204,319,'%02d/%02d/%02d',22,1);",
+										RTC_Clock.hour,
+										RTC_Clock.minute,
+										RTC_Clock.second);
+	GPU_LCD.print(Buffer);
+	GPU_LCD.print("\r\n");
+
 
 
 

@@ -24,7 +24,7 @@
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
-
+extern	DS1307 RTC_Clock;                                             	// 声明一个时钟类
 
 /* Private function prototypes -----------------------------------------------*/
 extern  void RTC_Init(void);                                            // RTC卡初始化
