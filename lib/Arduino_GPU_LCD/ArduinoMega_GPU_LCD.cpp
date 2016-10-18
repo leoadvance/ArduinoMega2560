@@ -59,9 +59,9 @@ void GPU_LCD_Init(void)
 
 	// 显示温湿度界面
 	GPU_LCD.print("DS16(32,48,'温度:',11,0);");
-	GPU_LCD.print("DS16(128,50,'℃',11,0);");
+	GPU_LCD.print("DS16(144,50,'℃',11,0);");
 	GPU_LCD.print("DS16(32,80,'湿度:',11,0);");
-	GPU_LCD.print("DS16(128,82,'%',11,0);");
+	GPU_LCD.print("DS16(144,82,'%',11,0);");
 	GPU_LCD.print("\r\n");
 
 }// End of void GPU_LCD_Init(void锛?
@@ -95,15 +95,21 @@ void GPU_LCD_Task(void)
 	float Temp, Humi;
 	char Temp_Array[8];
 	char Humi_Array[8];
+	char Buffer[96];
 
 
 	// 读取温湿度
 	DHTxx_Read(&Temp, &Humi);
 	dtostrf(Temp, 3, 2, Temp_Array);
 	dtostrf(Humi, 3, 2, Humi_Array);
-	DEBUG_UART.println(Temp_Array);
-	GPU_LCD.print("DS16(80, 60, '312', 1, 0);");
-	GPU_LCD.print("\r\n");
+
+	sprintf(Buffer, "LABL(16,80,50,136,'%s',15,2);", Temp_Array);
+	GPU_LCD.print(Buffer);
+
+	sprintf(Buffer, "LABL(16,80,82,136,'%s',15,2);\r\n", Humi_Array);
+	GPU_LCD.print(Buffer);
+
+
 
 }// End of void GPU_LCD_Task(void）
 
