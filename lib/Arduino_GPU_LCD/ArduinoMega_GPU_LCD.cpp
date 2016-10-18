@@ -5,7 +5,7 @@
 * IDE                :  Arduino
 * Version            :  V1.0
 * Date               :  10/17/2016
-* Description        :  GPU_LCDÁ®ãÂ∫è
+* Description        :  GPU_LCD≥Ã–Ú
 *******************************************************************************/
 /* Includes ------------------------------------------------------------------*/
 #include "ArduinoMega_RTC.h"
@@ -98,6 +98,7 @@ void GPU_Rx_Callback(char *p_Data, int Len)
 *******************************************************************************/
 void GPU_LCD_Task(void)
 {
+	static char i = 0;
 	float Temp, Humi;
 	char Temp_Array[8];
 	char Humi_Array[8];
@@ -128,11 +129,23 @@ void GPU_LCD_Task(void)
 							   			RTC_Clock.month,
 						       			RTC_Clock.dayOfMonth);
 	GPU_LCD.print(Buffer);
+	if (i)
+	{
+		i = 0;
+		sprintf(Buffer, "LABL(24,0,204,319,'%02d:%02d:%02d',22,1);",
+											RTC_Clock.hour,
+											RTC_Clock.minute,
+											RTC_Clock.second);
+	}
+	else
+	{
+		i = 1;
+		sprintf(Buffer, "LABL(24,0,204,319,'%02d %02d %02d',22,1);",
+											RTC_Clock.hour,
+											RTC_Clock.minute,
+											RTC_Clock.second);
+	}
 
-	sprintf(Buffer, "LABL(24,0,204,319,'%02d/%02d/%02d',22,1);",
-										RTC_Clock.hour,
-										RTC_Clock.minute,
-										RTC_Clock.second);
 	GPU_LCD.print(Buffer);
 	GPU_LCD.print("\r\n");
 
